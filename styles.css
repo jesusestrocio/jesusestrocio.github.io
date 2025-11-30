@@ -13,20 +13,29 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-body {
-  place-items: center;
-  border-style: solid;
-  border-color: navy;
-  border-width: 5px;
-
-}
-  header { 
-    font-size: 24px;
-    text-align: center;
-    padding-bottom: 10px;
-    border-width: 5px;
+  body {
+    place-items: center;
     border-style: solid;
-    border-color: teal;
+    border-color: navy;
+    border-width: 5px;
+
+  }
+  header { 
+      font-size: 24px;
+      text-align: center;
+      padding-bottom: 10px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: teal;
+    }
+  footer {
+    border: solid red;
+    height: auto;
+    width: auto;
+  }
+  .version-details {
+    position: relative; 
+    left: 200px;
   }
 
   .calculator-container {
