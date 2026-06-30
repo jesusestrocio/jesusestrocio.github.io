@@ -1,0 +1,136 @@
+/* Iphone X 375px */
+@media (max-width: 1536px) {
+    body {
+        background-color: lightblue ;
+    }
+    p {
+        margin: 0px;
+    }
+    #cookie-pop-up {
+        border: 2px solid;
+        border-radius: 10px;
+    }
+
+    #quiz-options-container {
+        background-color: brown;
+        width: 200px;
+        height: 500px;
+        justify-self: center;
+        margin-top: 35%;
+    }
+    
+    #Africa, 
+    #Asia,
+    #Europe,
+    #North-America,
+    #South-America,
+    #Oceania,
+    #All-Flags {
+        width: inherit;
+        margin-top: 10%;
+        height: 7%;
+    }
+
+    #Africa {
+        margin-top: 33%;
+        cursor: pointer;
+
+    }
+
+    #Africa::after {
+        /* content: " Extra Info"; */
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+  
+    #Africa:hover::after {
+        opacity: 1;
+    }
+
+    #africaButtoHighScore , p{
+        display: inline;
+    }
+
+    #display-flag-container {
+        display: none;
+        background-color: brown;
+        width: 200px;
+        height: 500px;
+        justify-self: center;
+        margin-top: 35%;
+    }
+    #score-and-close-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 0px;
+        border: solid 2px;
+    }
+    #high-score-counter {
+        display: grid;
+        justify-self: left;
+        margin-left : 5%;
+    }
+    #close-button {
+        display: grid;
+        justify-self: right;
+        margin-right: 5%;
+        cursor: pointer;
+    }
+
+    #flag-name-container{
+        border: solid 2px;
+        justify-items: center;
+        height: 95.5%;
+    }
+    #flag-container {
+        border: solid 2px;
+        width: 85%;
+        height: 30%;
+        margin-top: 40%;
+    }
+    #multiple-name-container{
+        border: solid 2px;
+        width: 85%;
+        height: 30%;
+        display: grid;
+        justify-content: center;
+    }
+
+    #selection-1, #selection-2, #selection-3, #selection-4 {
+        width: 100px;
+        height: 20px;
+        margin: 8px;
+        font-size: small;        
+    }
+
+    #end-of-quiz-options {
+        border: solid 2px;
+        width: 85%;
+        height: 60%;
+        margin-top: 40%;
+        display: none;
+    }
+
+}
+
+/* xs */
+/* @media (min-width: 475px) {} */
+
+/* sm */
+/* @media (min-width: 640px) {} */
+
+/* md */
+/* @media (min-width: 768px) {} */
+
+/* lg */
+/* @media (min-width: 1024px) {} */
+
+/* xl */
+/* @media (min-width: 1280px) {} */
+
+/* 2xl */
+@media (min-width: 1536px) {
+    body {
+        background-color: green ;
+    }
+}
