@@ -1,5 +1,9 @@
 /* Iphone X 375px */
 @media (max-width: 1536px) {
+    #heading-tag {
+        justify-content: center;
+    }
+
     body {
         background-color: lightblue ;
     }
