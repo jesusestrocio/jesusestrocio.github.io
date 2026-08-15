@@ -52,8 +52,23 @@ africaButton.addEventListener('click' , () => {
   const quizOptionsContainer = document.getElementById("quiz-options-container");
   const  displayFlagContainer = document.getElementById("display-flag-container");
 
+  const multipleNameContainer = document.getElementById("multiple-name-container")
+  const flagContainer = document.getElementById("flag-container")
+
+  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
+  
+  endOfQuizPopUp.style.display = 'none';
+
+  flagContainer.style.display = 'block';
+  multipleNameContainer.style.display = 'block';
+
   quizOptionsContainer.style.display = 'none';
   displayFlagContainer.style.display = 'block';
+
+
+  increaseFlagCount(count = 0)
+
+  currentFlagCounter.textContent = `${'0 / ' + africanFlags.length}`
 
 })
 
@@ -137,6 +152,7 @@ let universalCount = 0;
 
 function loadAfricanFlags(){
 
+// Keeps count of where you're in the quiz and then stops the quiz when needed
 if (universalCount > africanFlags.length){
   const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
   endOfQuizPopUp.style.display = 'block';
@@ -145,9 +161,7 @@ if (universalCount > africanFlags.length){
   const multipleNameContainer = document.getElementById("multiple-name-container")
   flagContainer.style.display = 'none';
   multipleNameContainer.style.display = 'none';
-
 }
-
 
 
 const apiLink = 'https://flagcdn.com/';
@@ -176,27 +190,50 @@ newImg.style.height = '100%';
 // Add to DOM
 container.appendChild(newImg);
 
-const multipleSelection = {
-0 : selectionOne,
-1 : selectionTwo,
-2 : selectionThree,
-3 : selectionFour
-}
+loadMultipleSelections()
 
-for (let i = 0; i < universalCount + 4; i++){
-  multipleSelection[i].textContent = africanFlags[i].country
+// const multipleSelection = {
+// 0 : selectionOne,
+// 1 : selectionTwo,
+// 2 : selectionThree,
+// 3 : selectionFour
+// }
 
-  // if (universalCount == africanFlags.length - ){
-  //   multipleSelection[i].textContent = africanFlags[i].country
-  // }
-
-}
+// for (let i = 0; i < africanFlags.length; i++){
+//   multipleSelection[i].textContent = africanFlags[i].country
+// }
 
 // Optional: Handle image load event
 newImg.onload = function() {
     console.log('Image loaded successfully');
 };
 
+}
+
+
+function loadMultipleSelections(){
+
+  const multipleSelection = {
+    0 : selectionOne,
+    1 : selectionTwo,
+    2 : selectionThree,
+    3 : selectionFour
+    }
+
+    console.log(universalCount)
+    for (let i = 0; i < 4; i++){
+
+      if ((africanFlags.length - 3) < universalCount){
+        console.log(africanFlags[i + universalCount].country)
+        multipleSelection[i].textContent = africanFlags[universalCount - i].country
+  
+      }
+      else {
+        console.log(africanFlags[i + universalCount].country)
+        multipleSelection[i].textContent = africanFlags[universalCount + i].country
+      }
+      
+    }
 }
 
 const restartQuizButton = document.getElementById("restart-quiz")
@@ -206,12 +243,15 @@ restartQuizButton.addEventListener('click' , () => {
 
   universalCount = 0
   highscoreCounter = 0
+  count = 0
+  increaseFlagCount(count)
 
   const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
   endOfQuizPopUp.style.display = 'none';
 
   const flagContainer = document.getElementById("flag-container")
   const multipleNameContainer = document.getElementById("multiple-name-container")
+  
   flagContainer.style.display = 'block';
   multipleNameContainer.style.display = 'block';
 
@@ -221,16 +261,28 @@ restartQuizButton.addEventListener('click' , () => {
 
 exitQuiz.addEventListener('click' , () => {
 
+
   const quizOptionsContainer = document.getElementById("quiz-options-container");
   const  displayFlagContainer = document.getElementById("display-flag-container");
 
   displayFlagContainer.style.display = 'none';
   quizOptionsContainer.style.display = 'block';
 
+  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
+  endOfQuizPopUp.style.display = 'none';
+
   universalCount = 0
   highscoreCounter = 0
 
 })
+
+// {/* <div id="high-score-counter">12/30</div> */}
+const currentFlagCounter = document.getElementById("high-score-counter")
+
+function increaseFlagCount(count){
+  let originalState = currentFlagCounter.textContent.slice(-4)
+  currentFlagCounter.textContent = `${count} ${originalState}` 
+}
 
 let highscoreCounter = 0
 function increaseHighScoreCounted (){
@@ -249,7 +301,7 @@ try {
     selections.addEventListener("click", () => {
   
       console.log(selections.innerHTML)
-  
+      increaseFlagCount(count++)
       if (selections.innerHTML == africanFlags[universalCount].country){
         selections.style.color = 'green'; 
         universalCount += 1   
@@ -258,17 +310,24 @@ try {
         setTimeout(() => {
           console.log("seTimeout Function");
           selections.style.color = 'black'; 
-        }, 3000);
+        }, 1000);
         setTimeout(() => {
           console.log("seTimeout Function");
           loadAfricanFlags()
-        }, 5000);
+        }, 2000);
 
       }
       else {
         selections.style.color = 'red';
         universalCount += 1
-        loadAfricanFlags()
+        setTimeout(() => {
+          console.log("seTimeout Function");
+          selections.style.color = 'black'; 
+        }, 1000);
+        setTimeout(() => {
+          console.log("seTimeout Function");
+          loadAfricanFlags()
+        }, 2000);
       }
       
     });
@@ -282,53 +341,30 @@ try {
 let count = 0;
 let newImg = new Image();
 
-// [selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selections)=>{
+const button = document.querySelectorAll(".under-construction");
+const popup = document.getElementById("popup");
 
-//   selections.addEventListener("click", () => {
-
-//     let container = document.getElementById('flag-container');
+document.querySelectorAll(".under-construction").forEach(button => {
+  button.addEventListener("mouseenter", ()=> {
+    const rect = button.getBoundingClientRect();
   
-//     // Create image using Image() constructor
-    
-//     newImg.src = flags[count].image;
-//     newImg.alt = flags[count].country;
-//     newImg.style.width = '100%';
-//     newImg.style.height = '100%';
+    console.log(rect)
   
-    
-//     // Add to DOM
-//     container.appendChild(newImg);
+    // Position popup below the button
+    popup.style.left = `${window.scrollX + rect.left + 2}px`;
+    popup.style.top = `${window.scrollY + rect.bottom + 5}px`;
   
-//     selectionOne.textContent = flags[count].multipleChoice[0];
-//     selectionTwo.textContent = flags[count].multipleChoice[1];
-//     selectionThree.textContent = flags[count].multipleChoice[2];
-//     selectionFour.textContent = flags[count].multipleChoice[3];
-  
-  
-//     // Optional: Handle image load event
-//     newImg.onload = function() {
-//         console.log('Image loaded successfully');
-//     };
-
-//     console.log(selections.innerHTML)
-//     if (selections.innerHTML == flags[count].country){
-//       selections.style.color = 'green';      
-//     }
-//     else {
-//       selections.style.color = 'red';
-//     }
-    
-//     count += 1
-  
-//   });
-
-//   function changeText(obj) {
-//     obj.textContent = "New Text!";
-//   }
-//   function restoreText(obj) {
-//     obj.textContent = "Original Text";
-//   }
-
-// })
+    // popup.style.left = `${window.scrollX + 100}px`;
+    // popup.style.top = `${window.scrollY + 100}px`;
 
 
+
+    popup.style.display = "block";
+  })
+  });
+
+  document.querySelectorAll(".under-construction").forEach(button => {
+    button.addEventListener("mouseleave", ()=> {
+      popup.style.display = "none";
+    });
+});

@@ -16,6 +16,20 @@
 >> Currently Stuck On Multiple Seclections
 >> The selection should change as we parse through the african flag object
 
+01/08 
+>> CSS Issue - central african republic, the button is not being able to hold the text
+    -> hard coded 170px width for all buttons
+>> CSS Issue - The buttons go to the left side of the page when we restart the quiz
+    -> Issue seems to be fixed after changes made to the width of all buttons
+>> CSS Issue - The word under construction is being displayed due to screen dimensions
+    -> Issue Fixed - getBoundingClientRect() <- provides the button coordinates relative to the viewport
+    -> Position : Relative and Position : Absolute
+
+02/08
+>> JS Issue - country and county, well think I have made a seplling error
+>> CSS Issue - The popup under construction could use a bit more UI friendly interface
+
+
 
 Solution To Create The Multiple Selection Option
 
