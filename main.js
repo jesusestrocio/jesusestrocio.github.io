@@ -1,22 +1,3 @@
-const flags = {
-  0 : {
-    country : 'Albania',
-    image : "flag-images/albania.png",
-    multipleChoice : ['Albania', 'Africa', 'India', 'United Kingdom']
-  },
-  1 : {
-    country : 'Afghanistan',
-    image : "flag-images/afghanistan.png",
-    multipleChoice : ['Afghanistan', 'Africa', 'India', 'United Kingdom']
-  },
-  2 : {
-    country : 'Algeria',
-    image : "flag-images/algeria.png",
-    multipleChoice : ['Algeria', 'Africa', 'India', 'United Kingdom']
-  },
-
-};
-
 const selectionOne = document.getElementById("selection-1");
 const selectionTwo = document.getElementById("selection-2");
 const selectionThree = document.getElementById("selection-3");
@@ -24,72 +5,56 @@ const selectionFour = document.getElementById("selection-4");
 
 const africaButton = document.getElementById('Africa');
 
-// <p id="africaButtonText">Africa</p>
-// <p id="africaButtonHighScore"></p>
-
-// localStorage.setItem("Africa", JSON.stringify([0,54]));
 console.log(JSON.parse(localStorage.getItem('Africa')))
 
+// localStorage.clear();
+
+// Hard Coding The Max Numbers Of Flags On A Continent
 if (localStorage.getItem('Africa') == null){
   localStorage.setItem("Africa", JSON.stringify([0,54]));
 }
 
-
-africaButton.addEventListener('mouseover', ()=>{
+// When MouseOver African Button -> Users High Score Is Shown
+africaButton.addEventListener('mouseover', () => {
   const highscore = document.getElementById("africaButtonHighScore");
   africanFlags.length
   const flagScoreDetails = JSON.parse(localStorage.getItem('Africa'))
-  // highscore.textContent = '0 / ' + africanFlags.length;
   highscore.textContent = flagScoreDetails[0] + "/" + flagScoreDetails[1];
+  console.log(highscore)
 })
 
-africaButton.addEventListener("mouseleave", ()=>{
+// When MouseLeave African Button -> Back To It's Original State
+africaButton.addEventListener("mouseleave", () => {
   const highscore = document.getElementById("africaButtonHighScore");
   highscore.textContent = '';
 })
 
-africaButton.addEventListener('click' , () => {
-  const quizOptionsContainer = document.getElementById("quiz-options-container");
-  const  displayFlagContainer = document.getElementById("display-flag-container");
 
-  const multipleNameContainer = document.getElementById("multiple-name-container")
-  const flagContainer = document.getElementById("flag-container")
+const currentFlagCounter = document.getElementById("high-score-counter-text")
 
-  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
-  
-  endOfQuizPopUp.style.display = 'none';
+const quizOptionsContainer = document.getElementById("quiz-options-container");
+const  displayFlagContainer = document.getElementById("display-flag-container");
 
-  flagContainer.style.display = 'block';
-  multipleNameContainer.style.display = 'block';
+const multipleNameContainer = document.getElementById("multiple-name-container")
+const flagContainer = document.getElementById("flag-container")
 
-  quizOptionsContainer.style.display = 'none';
-  displayFlagContainer.style.display = 'block';
-
-
-  increaseFlagCount(count = 0)
-
-  currentFlagCounter.textContent = `${'0 / ' + africanFlags.length}`
-
-})
-
-// localStorage.setItem("Africa", JSON.stringify([0,54]));
-console.log(JSON.parse(localStorage.getItem('Africa')))
-
+const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
 
 const closeButton = document.getElementById("close-button");
 
-closeButton.addEventListener('click' , () => {
+const restartQuizButton = document.getElementById("restart-quiz")
+const exitQuiz = document.getElementById("exit-to-main-menu")
 
-  const quizOptionsContainer = document.getElementById("quiz-options-container");
-  const  displayFlagContainer = document.getElementById("display-flag-container");
+const button = document.querySelectorAll(".under-construction");
+const popup = document.getElementById("popup");
 
-  displayFlagContainer.style.display = 'none';
-  quizOptionsContainer.style.display = 'block';
+const startVariable = 0;
+let universalCount = 0;
+let highscoreCounter = 0
+let count = 1;
 
-  universalCount = 0
-  highscoreCounter = 0
+let newImg = new Image();
 
-})
 
 
 const africanFlags = {
@@ -137,45 +102,119 @@ const africanFlags = {
     country : 'Comoros',
     countryCode : 'KM',
   },
-  length : 10,
+  length : 11,
 }
 
-const startVariable = 0;
+
+const europeanFlags = {
+  0: { country: 'France', countryCode: 'FR' },
+  1: { country: 'Germany', countryCode: 'DE' },
+  2: { country: 'Italy', countryCode: 'IT' },
+  3: { country: 'Spain', countryCode: 'ES' },
+  4: { country: 'Portugal', countryCode: 'PT' },
+  5: { country: 'United Kingdom', countryCode: 'GB' },
+  6: { country: 'Ireland', countryCode: 'IE' },
+  7: { country: 'Netherlands', countryCode: 'NL' },
+  8: { country: 'Belgium', countryCode: 'BE' },
+  9: { country: 'Sweden', countryCode: 'SE' },
+  10: { country: 'Norway', countryCode: 'NO' },
+  length : 11,
+};
+
+function increaseFlagCount(count){
+  currentFlagCounter.textContent = `${count}` 
+}
 
 africaButton.addEventListener('click' , () => {
+  // 1. 
+  quizOptionsContainer.style.display = 'none';
+  displayFlagContainer.style.display = 'block';
+
+  // 2.
+  flagContainer.style.display = 'block';
+  multipleNameContainer.style.display = 'block';
+  // 3. 
+  endOfQuizPopUp.style.display = 'none';
+
+  currentFlagCounter.textContent = `${count}`
+  // currentFlagCounter.textContent = `${'1 / ' + africanFlags.length}`
 
   loadAfricanFlags()
 
+  //increaseFlagCount(count++);
 })
 
-let universalCount = 0;
+africaButton.addEventListener('click' , () => {
+  // 1. 
+  quizOptionsContainer.style.display = 'none';
+  displayFlagContainer.style.display = 'block';
+
+  // 2.
+  flagContainer.style.display = 'block';
+  multipleNameContainer.style.display = 'block';
+  // 3. 
+  endOfQuizPopUp.style.display = 'none';
+
+  currentFlagCounter.textContent = `${count}`
+  // currentFlagCounter.textContent = `${'1 / ' + africanFlags.length}`
+
+  loadAfricanFlags()
+
+  //increaseFlagCount(count++);
+})
+
+
+closeButton.addEventListener('click' , () => {
+
+  displayFlagContainer.style.display = 'none';
+  quizOptionsContainer.style.display = 'block';
+
+  // Reset the highscore counter to 0
+  count = 1
+
+  // Now sure about the below.
+  universalCount = 0
+  highscoreCounter = 0
+
+})
+
+const currentGameHighScore = document.getElementById('current-games-high-score')
 
 function loadAfricanFlags(){
 
-// Keeps count of where you're in the quiz and then stops the quiz when needed
-if (universalCount > africanFlags.length){
-  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
-  endOfQuizPopUp.style.display = 'block';
+// If -> User is at the end of the flag quiz
+if (universalCount >= africanFlags.length){
 
-  const flagContainer = document.getElementById("flag-container")
-  const multipleNameContainer = document.getElementById("multiple-name-container")
   flagContainer.style.display = 'none';
   multipleNameContainer.style.display = 'none';
+
+  endOfQuizPopUp.style.display = 'grid';
+
+  const flagScoreDetails = JSON.parse(localStorage.getItem('Africa'))
+  // highscore.textContent = flagScoreDetails[0] + "/" + flagScoreDetails[1];
+
+  currentGameHighScore.textContent = highscoreCounter + "/" + flagScoreDetails[1]
+  count = 0
+  universalCount = 0
+
 }
 
+//id=high-score-counter-total
+
+const totalFlagsInList = document.getElementById('high-score-counter-total');
+// totalFlagsInList.textContent = `/${africanFlags.length}`
+totalFlagsInList.textContent = '/ ' + `${africanFlags.length}`;
+
+increaseFlagCount(count++);
 
 const apiLink = 'https://flagcdn.com/';
 
 let stringM = '';
+console.log('Keeping Track Of Universal Count', universalCount)
 const countryInitials = africanFlags[universalCount].countryCode.toLowerCase()
 stringM = apiLink + countryInitials + '.svg'
 
 console.log(stringM)
-
-
-// <img src="https://flagcdn.com/ug.svg" width="30" alt="Uganda"></img>
-// <img src="https://flagcdn.com/gm.svg" width="30" alt="Gambia"></img>
-
 
 let container = document.getElementById('flag-container');
   
@@ -186,27 +225,14 @@ newImg.alt = africanFlags[universalCount].country;
 newImg.style.width = '100%';
 newImg.style.height = '100%';
 
-
 // Add to DOM
 container.appendChild(newImg);
 
+newImg.onload = function(){
+  console.log('Image Loaded')
+}
+
 loadMultipleSelections()
-
-// const multipleSelection = {
-// 0 : selectionOne,
-// 1 : selectionTwo,
-// 2 : selectionThree,
-// 3 : selectionFour
-// }
-
-// for (let i = 0; i < africanFlags.length; i++){
-//   multipleSelection[i].textContent = africanFlags[i].country
-// }
-
-// Optional: Handle image load event
-newImg.onload = function() {
-    console.log('Image loaded successfully');
-};
 
 }
 
@@ -221,12 +247,11 @@ function loadMultipleSelections(){
     }
 
     console.log(universalCount)
+
     for (let i = 0; i < 4; i++){
 
-      if ((africanFlags.length - 3) < universalCount){
-        console.log(africanFlags[i + universalCount].country)
+      if (universalCount > (africanFlags.length - 4)){
         multipleSelection[i].textContent = africanFlags[universalCount - i].country
-  
       }
       else {
         console.log(africanFlags[i + universalCount].country)
@@ -236,55 +261,81 @@ function loadMultipleSelections(){
     }
 }
 
-const restartQuizButton = document.getElementById("restart-quiz")
-const exitQuiz = document.getElementById("exit-to-main-menu")
+
+
+let isProcessing = false;
+
+[selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selection) => {
+
+
+  selection.addEventListener("click", () => {
+
+    if (isProcessing) return;
+
+    isProcessing = true;
+
+    console.log(selection.innerHTML);
+    console.log(count, 'count before increaseing count')
+
+    if (selection.innerHTML === africanFlags[universalCount].country) {
+
+      selection.style.color = "green";
+
+      universalCount += 1;
+      highscoreCounter += 1;
+
+      increaseHighScoreCounted();
+
+    } else {
+
+      selection.style.color = "red";
+
+      universalCount += 1;
+    }
+
+    setTimeout(() => {
+      selection.style.color = "black";
+    }, 1000);
+
+    setTimeout(() => {
+      loadAfricanFlags();
+      isProcessing = false;
+    }, 2000);
+
+  });
+
+});
+
 
 restartQuizButton.addEventListener('click' , () => {
 
   universalCount = 0
   highscoreCounter = 0
-  count = 0
-  increaseFlagCount(count)
+  count = 1
 
-  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
   endOfQuizPopUp.style.display = 'none';
-
-  const flagContainer = document.getElementById("flag-container")
-  const multipleNameContainer = document.getElementById("multiple-name-container")
   
   flagContainer.style.display = 'block';
   multipleNameContainer.style.display = 'block';
 
+  // let isProcessing = true;
   loadAfricanFlags()
 
 })
 
 exitQuiz.addEventListener('click' , () => {
 
-
-  const quizOptionsContainer = document.getElementById("quiz-options-container");
-  const  displayFlagContainer = document.getElementById("display-flag-container");
-
   displayFlagContainer.style.display = 'none';
   quizOptionsContainer.style.display = 'block';
 
-  const endOfQuizPopUp = document.getElementById("end-of-quiz-options")
   endOfQuizPopUp.style.display = 'none';
 
   universalCount = 0
   highscoreCounter = 0
+  count = 1
 
 })
 
-// {/* <div id="high-score-counter">12/30</div> */}
-const currentFlagCounter = document.getElementById("high-score-counter")
-
-function increaseFlagCount(count){
-  let originalState = currentFlagCounter.textContent.slice(-4)
-  currentFlagCounter.textContent = `${count} ${originalState}` 
-}
-
-let highscoreCounter = 0
 function increaseHighScoreCounted (){
   let currentHighScore = JSON.parse(localStorage.getItem('Africa'))
 
@@ -293,56 +344,6 @@ function increaseHighScoreCounted (){
     console.log(JSON.parse(localStorage.getItem('Africa')))
   }
 }
-
-
-try {
-  [selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selections)=>{
-
-    selections.addEventListener("click", () => {
-  
-      console.log(selections.innerHTML)
-      increaseFlagCount(count++)
-      if (selections.innerHTML == africanFlags[universalCount].country){
-        selections.style.color = 'green'; 
-        universalCount += 1   
-        highscoreCounter += 1
-        increaseHighScoreCounted () 
-        setTimeout(() => {
-          console.log("seTimeout Function");
-          selections.style.color = 'black'; 
-        }, 1000);
-        setTimeout(() => {
-          console.log("seTimeout Function");
-          loadAfricanFlags()
-        }, 2000);
-
-      }
-      else {
-        selections.style.color = 'red';
-        universalCount += 1
-        setTimeout(() => {
-          console.log("seTimeout Function");
-          selections.style.color = 'black'; 
-        }, 1000);
-        setTimeout(() => {
-          console.log("seTimeout Function");
-          loadAfricanFlags()
-        }, 2000);
-      }
-      
-    });
-  })
-  
-} catch (error) {
-  console.log(error)
-}
-
-
-let count = 0;
-let newImg = new Image();
-
-const button = document.querySelectorAll(".under-construction");
-const popup = document.getElementById("popup");
 
 document.querySelectorAll(".under-construction").forEach(button => {
   button.addEventListener("mouseenter", ()=> {
@@ -353,11 +354,6 @@ document.querySelectorAll(".under-construction").forEach(button => {
     // Position popup below the button
     popup.style.left = `${window.scrollX + rect.left + 2}px`;
     popup.style.top = `${window.scrollY + rect.bottom + 5}px`;
-  
-    // popup.style.left = `${window.scrollX + 100}px`;
-    // popup.style.top = `${window.scrollY + 100}px`;
-
-
 
     popup.style.display = "block";
   })
@@ -368,3 +364,35 @@ document.querySelectorAll(".under-construction").forEach(button => {
       popup.style.display = "none";
     });
 });
+
+//cookie-pop-up
+document.getElementById("cookie-pop-up").onload = function() {myFunction()};
+
+{/* <div id="app"> */}
+const app = document.getElementById("app");
+const cookiePopUpSection = document.getElementById("cookie-pop-up");
+const acceptAllCookies = document.getElementById("accept-all-cookie");
+
+function cookiePopUp() {
+  console.log('Hiding The Application While Cookies Are Being Selected')
+  app.style.display = 'none';
+}
+
+window.addEventListener('load', (event) => {
+  console.log('The page is fully loaded.');
+    console.log('Hiding The Application While Cookies Are Being Selected')
+    app.style.display = 'none';
+    app.style.background = 'blur';
+});
+
+acceptAllCookies.addEventListener('click', ()=>{
+    app.style.display = '';
+    cookiePopUpSection.style.display = 'none';
+})
+
+    //   <section id="cookie-pop-up">
+    //   <p id="cookie-policy-header">Cookie Policy</p>
+    //   <i id="cookie-information-icon" style="font-size:24px" class="fa">&#xf05a;</i>
+    //   <button id="accept-all-cookie">Accept All & Continue</button>
+    //   <button id="reject-cookie">Reject</button>
+    // </section>

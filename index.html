@@ -10,44 +10,50 @@
   </head>
   <h1 id="heading-tag">Flags Quiz</h1>
   <body>
-    <div id="app"></div>
-    <section id="quiz-options-container">
-      <div id="popup" class="popup"> Under Construction </div>
-      <button id="Africa">
-        <p id="africaButtonText">Africa</p>
-        <p id="africaButtonHighScore"></p>
-      </button>
-      <button id="Asia" class="under-construction" >Asia</button>
-      <button id="Europe" class="under-construction" >Europe</button>
-      <button id="North-America" class="under-construction" >North America</button>
-      <button id="South-America" class="under-construction" >South America</button>
-      <button id="Oceania" class="under-construction" >Oceania</button>
-      <button id="All-Flags" class="under-construction" >All Flags</button>
-    </section>
+    <div id="app">
 
-    <section id="display-flag-container">
-      <div id="score-and-close-container">
-        <div id="high-score-counter"></div>
-        <div id="close-button">X</div>
-      </div>
-      <div id="flag-name-container">
-        <div id="flag-container">
+      <section id="quiz-options-container">
+        <div id="popup" class="popup"> Under Construction </div>
+        <button id="Africa">
+          <p id="africaButtonText">Africa</p>
+          <p id="africaButtonHighScore"></p>
+        </button>
+        <button id="Asia" class="under-construction" >Asia</button>
+        <button id="Europe" class="under-construction" >Europe</button>
+        <button id="North-America" class="under-construction" >North America</button>
+        <button id="South-America" class="under-construction" >South America</button>
+        <button id="Oceania" class="under-construction" >Oceania</button>
+        <button id="All-Flags" class="under-construction" >All Flags</button>
+      </section>
+      
+      <section id="display-flag-container">
+        <div id="score-and-close-container">
+          <div id="high-score-counter">
+            <span id=high-score-counter-text></span><span id=high-score-counter-total></span>
+          </div>
+          <div id="close-button">X</div>
         </div>
-        <div id="multiple-name-container">
-          <button id="selection-1"></button>
-          <button id="selection-2"></button>
-          <button id="selection-3"></button>
-          <button id="selection-4"></button>
+        <div id="flag-name-container">
+          <div id="flag-container">
+          </div>
+          <div id="multiple-name-container">
+            <button id="selection-1"></button>
+            <button id="selection-2"></button>
+            <button id="selection-3"></button>
+            <button id="selection-4"></button>
+          </div>
+          <div id="end-of-quiz-options">
+            <p id="high-score">High Score : <br>
+              <span id="current-games-high-score"></span>
+            </p>
+            <button id="restart-quiz">Restart Quiz</button>
+            <button id="exit-to-main-menu">Exit To Main Menu</button>
+          </div>
         </div>
-        <div id="end-of-quiz-options">
-          <p id="high-score">High Score : </p>
-          <button id="restart-quiz">Restart Quiz</button>
-          <button id="exit-to-main-menu">Exit To Main Menu</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="cookie-pop-up" hidden="hidden" >
+      </section>
+      
+    </div>
+      <section id="cookie-pop-up">
       <p id="cookie-policy-header">Cookie Policy</p>
       <i id="cookie-information-icon" style="font-size:24px" class="fa">&#xf05a;</i>
       <button id="accept-all-cookie">Accept All & Continue</button>

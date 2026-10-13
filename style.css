@@ -10,9 +10,31 @@
     p {
         margin: 0px;
     }
+    #app {
+    }
+
     #cookie-pop-up {
         border: 2px solid;
         border-radius: 10px;
+        width: 98vw;
+        position: fixed;
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        bottom: 7vh;
+
+        animation: mymove 2s ease-out;
+    }
+
+    @keyframes mymove {
+        from {
+            bottom: -500px;
+        }
+
+        to {
+            bottom: 7vh;
+        }
     }
 
     #quiz-options-container {
@@ -20,7 +42,7 @@
         width: 200px;
         height: 500px;
         justify-self: center;
-        margin-top: 35%;
+        margin-top: 20vh;
     }
     
     #Africa, 
@@ -31,7 +53,7 @@
     #Oceania,
     #All-Flags {
         width: inherit;
-        margin-top: 10%;
+        margin-top: inherit;
         height: 7%;
     }
 
@@ -61,7 +83,7 @@
         width: 200px;
         height: 500px;
         justify-self: center;
-        margin-top: 35%;
+        margin-top: 20vh;
     }
     #score-and-close-container {
         display: grid;
@@ -72,13 +94,32 @@
     #high-score-counter {
         display: grid;
         justify-self: left;
+        grid-template-columns: 30px 30px;
         margin-left : 5%;
+        border-radius: 25%;
+        padding: 5px;
+        padding-right: 10px;
+        background-color: aqua;
+
     }
+
+    #high-score-counter-text {
+    display: grid;
+    }
+                
+    #high-score-counter-total {
+    display: grid;
+    }
+
     #close-button {
         display: grid;
         justify-self: right;
         margin-right: 5%;
         cursor: pointer;
+        border: 2px solids;
+        border-radius: 25%;
+        padding: 5px;
+        background-color: aqua;
     }
 
     #flag-name-container{
@@ -108,17 +149,40 @@
     }
 
     #end-of-quiz-options {
+        display: none;
+        display: grid;
+        grid-template-rows: 20% 20% 20%;
+        align-items: center;
         border: solid 2px;
         width: 85%;
         height: 60%;
         margin-top: 40%;
-        display: none;
+    }
+
+
+    #high-score {
+        display: grid;
+        border: 2px solid black;
+        height: fit-content;
+        text-align: center;
+        background-color: whitesmoke;
+    }
+    #restart-quiz {
+        height:inherit;
+
+    }
+    #exit-to-main-menu {
+        height:inherit;
+
+        
     }
 
     #popup {
         position: absolute;
         display: none;
     }
+
+
 
 }
 
@@ -149,9 +213,31 @@
     p {
         margin: 0px;
     }
+    #app {
+    }
+
     #cookie-pop-up {
         border: 2px solid;
         border-radius: 10px;
+        width: 98vw;
+        position: fixed;
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        bottom: 7vh;
+
+        animation: mymove 2s ease-out;
+    }
+
+    @keyframes mymove {
+        from {
+            bottom: -500px;
+        }
+
+        to {
+            bottom: 7vh;
+        }
     }
 
     #quiz-options-container {
@@ -159,7 +245,7 @@
         width: 200px;
         height: 500px;
         justify-self: center;
-        margin-top: 35%;
+        margin-top: 20vh;
     }
     
     #Africa, 
@@ -211,13 +297,32 @@
     #high-score-counter {
         display: grid;
         justify-self: left;
+        grid-template-columns: 30px 30px;
         margin-left : 5%;
+        border-radius: 25%;
+        padding: 5px;
+        padding-right: 10px;
+        background-color: aqua;
+
     }
+
+    #high-score-counter-text {
+    display: grid;
+    }
+                
+    #high-score-counter-total {
+    display: grid;
+    }
+
     #close-button {
         display: grid;
         justify-self: right;
         margin-right: 5%;
         cursor: pointer;
+        border: 2px solids;
+        border-radius: 25%;
+        padding: 5px;
+        background-color: aqua;
     }
 
     #flag-name-container{
@@ -247,11 +352,40 @@
     }
 
     #end-of-quiz-options {
+        display: none;
+        display: grid;
+        grid-template-rows: 20% 20% 20%;
+        align-items: center;
         border: solid 2px;
         width: 85%;
         height: 60%;
         margin-top: 40%;
+    }
+
+
+    #high-score {
+        display: grid;
+        border: 2px solid black;
+        height: fit-content;
+        text-align: center;
+        background-color: whitesmoke;
+    }
+    #restart-quiz {
+        height:inherit;
+
+    }
+    #exit-to-main-menu {
+        height:inherit;
+
+        
+    }
+
+    #popup {
+        position: absolute;
         display: none;
     }
+
+
+
 
 }
