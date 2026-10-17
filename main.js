@@ -4,8 +4,11 @@ const selectionThree = document.getElementById("selection-3");
 const selectionFour = document.getElementById("selection-4");
 
 const africaButton = document.getElementById('Africa');
+const europeanButton = document.getElementById('Europe');
+
 
 console.log(JSON.parse(localStorage.getItem('Africa')))
+console.log(JSON.parse(localStorage.getItem('Europe')))
 
 // localStorage.clear();
 
@@ -13,6 +16,32 @@ console.log(JSON.parse(localStorage.getItem('Africa')))
 if (localStorage.getItem('Africa') == null){
   localStorage.setItem("Africa", JSON.stringify([0,54]));
 }
+
+if (localStorage.getItem('Europe') == null){
+  localStorage.setItem("Europe", JSON.stringify([0,49]));
+}
+
+const app = document.getElementById("app");
+const cookiePopUpSection = document.getElementById("cookie-pop-up");
+const acceptAllCookies = document.getElementById("accept-all-cookie");
+
+function cookiePopUp() {
+  console.log('Hiding The Application While Cookies Are Being Selected')
+  app.style.display = 'none';
+}
+
+window.addEventListener('load', (event) => {
+    console.log('The page is fully loaded.');
+    console.log('Hiding The Application While Cookies Are Being Selected')
+    app.style.display = 'none';
+    app.style.background = 'blur';
+
+});
+
+acceptAllCookies.addEventListener('click', ()=>{
+    app.style.display = 'block';
+    cookiePopUpSection.style.display = 'none';
+})
 
 // When MouseOver African Button -> Users High Score Is Shown
 africaButton.addEventListener('mouseover', () => {
@@ -26,6 +55,20 @@ africaButton.addEventListener('mouseover', () => {
 // When MouseLeave African Button -> Back To It's Original State
 africaButton.addEventListener("mouseleave", () => {
   const highscore = document.getElementById("africaButtonHighScore");
+  highscore.textContent = '';
+})
+
+
+europeanButton.addEventListener('mouseover', () => {
+  const highscore = document.getElementById("europeanButtonHighScore");
+  europeanFlags.length
+  const flagScoreDetails = JSON.parse(localStorage.getItem('Europe'))
+  highscore.textContent = flagScoreDetails[0] + "/" + flagScoreDetails[1];
+  console.log(highscore)
+})
+
+europeanButton.addEventListener("mouseleave", () => {
+  const highscore = document.getElementById("europeanButtonHighScore");
   highscore.textContent = '';
 })
 
@@ -125,45 +168,6 @@ function increaseFlagCount(count){
   currentFlagCounter.textContent = `${count}` 
 }
 
-africaButton.addEventListener('click' , () => {
-  // 1. 
-  quizOptionsContainer.style.display = 'none';
-  displayFlagContainer.style.display = 'block';
-
-  // 2.
-  flagContainer.style.display = 'block';
-  multipleNameContainer.style.display = 'block';
-  // 3. 
-  endOfQuizPopUp.style.display = 'none';
-
-  currentFlagCounter.textContent = `${count}`
-  // currentFlagCounter.textContent = `${'1 / ' + africanFlags.length}`
-
-  loadAfricanFlags()
-
-  //increaseFlagCount(count++);
-})
-
-africaButton.addEventListener('click' , () => {
-  // 1. 
-  quizOptionsContainer.style.display = 'none';
-  displayFlagContainer.style.display = 'block';
-
-  // 2.
-  flagContainer.style.display = 'block';
-  multipleNameContainer.style.display = 'block';
-  // 3. 
-  endOfQuizPopUp.style.display = 'none';
-
-  currentFlagCounter.textContent = `${count}`
-  // currentFlagCounter.textContent = `${'1 / ' + africanFlags.length}`
-
-  loadAfricanFlags()
-
-  //increaseFlagCount(count++);
-})
-
-
 closeButton.addEventListener('click' , () => {
 
   displayFlagContainer.style.display = 'none';
@@ -177,8 +181,136 @@ closeButton.addEventListener('click' , () => {
   highscoreCounter = 0
 
 })
+window.addEventListener('DOMContentLoaded', (event) => {
+
+  [africaButton, europeanButton].forEach((countryButtonClicked) => {
+
+    countryButtonClicked.addEventListener('click' , () => {
+
+      quizOptionsContainer.style.display = 'none';
+      displayFlagContainer.style.display = 'block';
+
+      flagContainer.style.display = 'block';
+      multipleNameContainer.style.display = 'block';
+
+      endOfQuizPopUp.style.display = 'none';
+
+      currentFlagCounter.textContent = `${count}`
+
+      if (countryButtonClicked == africaButton){
+        // loadAfricanFlags()
+        loadFlags(africanFlags, 'Africa')
+      }
+      else if (countryButtonClicked == europeanButton){
+          // loadEuropeanFlags()
+          loadFlags(europeanFlags, 'Europe')
+
+      }
+
+    })
+
+})
+})
+
+
+
+
+// africaButton.addEventListener('click' , () => {
+//   // 1. 
+//   quizOptionsContainer.style.display = 'none';
+//   displayFlagContainer.style.display = 'block';
+
+//   // 2.
+//   flagContainer.style.display = 'block';
+//   multipleNameContainer.style.display = 'block';
+//   // 3. 
+//   endOfQuizPopUp.style.display = 'none';
+
+//   currentFlagCounter.textContent = `${count}`
+//   // currentFlagCounter.textContent = `${'1 / ' + africanFlags.length}`
+
+//   loadAfricanFlags()
+
+//   //increaseFlagCount(count++);
+// })
+
+// europeanButton.addEventListener('click' , () => {
+//   // 1. 
+//   quizOptionsContainer.style.display = 'none';
+//   displayFlagContainer.style.display = 'block';
+
+//   // 2.
+//   flagContainer.style.display = 'block';
+//   multipleNameContainer.style.display = 'block';
+//   // 3. 
+//   endOfQuizPopUp.style.display = 'none';
+
+//   currentFlagCounter.textContent = `${count}`
+
+//   loadEuropeanFlags()
+
+//   //increaseFlagCount(count++);
+// })
+
 
 const currentGameHighScore = document.getElementById('current-games-high-score')
+
+function loadFlags(continentPicked, continent){
+
+if (universalCount >= continentPicked.length){
+
+  flagContainer.style.display = 'none';
+  multipleNameContainer.style.display = 'none';
+
+  endOfQuizPopUp.style.display = 'grid';
+
+  const flagScoreDetails = JSON.parse(localStorage.getItem(continent))
+  // highscore.textContent = flagScoreDetails[0] + "/" + flagScoreDetails[1];
+
+  currentGameHighScore.textContent = highscoreCounter + "/" + flagScoreDetails[1]
+  count = 0
+  universalCount = 0
+
+}
+
+//id=high-score-counter-total
+
+const totalFlagsInList = document.getElementById('high-score-counter-total');
+// totalFlagsInList.textContent = `/${africanFlags.length}`
+totalFlagsInList.textContent = '/ ' + `${continentPicked.length}`;
+
+increaseFlagCount(count++);
+
+const apiLink = 'https://flagcdn.com/';
+
+let stringM = '';
+console.log('Keeping Track Of Universal Count', universalCount)
+const countryInitials = continentPicked[universalCount].countryCode.toLowerCase()
+stringM = apiLink + countryInitials + '.svg'
+
+console.log(stringM)
+
+let container = document.getElementById('flag-container');
+  
+// Create image using Image() constructor
+
+newImg.src = stringM;
+newImg.alt = continentPicked[universalCount].country;
+newImg.style.width = '100%';
+newImg.style.height = '100%';
+
+// Add to DOM
+container.appendChild(newImg);
+
+newImg.onload = function(){
+  console.log('Image Loaded')
+}
+
+// loadMultipleSelections()
+// loadMultipleSelectionsForEurope()
+loadMultipleSelections(continentPicked)
+
+}
 
 function loadAfricanFlags(){
 
@@ -236,8 +368,60 @@ loadMultipleSelections()
 
 }
 
+function loadEuropeanFlags(){
 
-function loadMultipleSelections(){
+  if (universalCount >= europeanFlags.length){
+
+  flagContainer.style.display = 'none';
+  multipleNameContainer.style.display = 'none';
+
+  endOfQuizPopUp.style.display = 'grid';
+
+  const flagScoreDetails = JSON.parse(localStorage.getItem('Europe'))
+  // highscore.textContent = flagScoreDetails[0] + "/" + flagScoreDetails[1];
+
+  currentGameHighScore.textContent = highscoreCounter + "/" + flagScoreDetails[1]
+  count = 0
+  universalCount = 0
+
+}
+
+const totalFlagsInList = document.getElementById('high-score-counter-total');
+// totalFlagsInList.textContent = `/${africanFlags.length}`
+totalFlagsInList.textContent = '/ ' + `${europeanFlags.length}`;
+
+increaseFlagCount(count++);
+
+const apiLink = 'https://flagcdn.com/';
+
+let stringM = '';
+console.log('Keeping Track Of Universal Count', universalCount)
+const countryInitials = europeanFlags[universalCount].countryCode.toLowerCase()
+stringM = apiLink + countryInitials + '.svg'
+
+console.log(stringM)
+
+let container = document.getElementById('flag-container');
+  
+// Create image using Image() constructor
+
+newImg.src = stringM;
+newImg.alt = europeanFlags[universalCount].country;
+newImg.style.width = '100%';
+newImg.style.height = '100%';
+
+// Add to DOM
+container.appendChild(newImg);
+
+newImg.onload = function(){
+  console.log('Image Loaded')
+}
+
+loadMultipleSelectionsForEurope()
+
+}
+
+function loadMultipleSelections(continentPicked){
 
   const multipleSelection = {
     0 : selectionOne,
@@ -251,11 +435,59 @@ function loadMultipleSelections(){
     for (let i = 0; i < 4; i++){
 
       if (universalCount > (africanFlags.length - 4)){
-        multipleSelection[i].textContent = africanFlags[universalCount - i].country
+        multipleSelection[i].textContent = continentPicked[universalCount - i].country
       }
       else {
         console.log(africanFlags[i + universalCount].country)
-        multipleSelection[i].textContent = africanFlags[universalCount + i].country
+        multipleSelection[i].textContent = continentPicked[universalCount + i].country
+      }
+      
+    }
+}
+
+// function loadMultipleSelections(){
+
+//   const multipleSelection = {
+//     0 : selectionOne,
+//     1 : selectionTwo,
+//     2 : selectionThree,
+//     3 : selectionFour
+//     }
+
+//     console.log(universalCount)
+
+//     for (let i = 0; i < 4; i++){
+
+//       if (universalCount > (africanFlags.length - 4)){
+//         multipleSelection[i].textContent = africanFlags[universalCount - i].country
+//       }
+//       else {
+//         console.log(africanFlags[i + universalCount].country)
+//         multipleSelection[i].textContent = africanFlags[universalCount + i].country
+//       }
+      
+//     }
+// }
+
+function loadMultipleSelectionsForEurope(){
+
+  const multipleSelection = {
+    0 : selectionOne,
+    1 : selectionTwo,
+    2 : selectionThree,
+    3 : selectionFour
+    }
+
+    console.log(universalCount)
+
+    for (let i = 0; i < 4; i++){
+
+      if (universalCount > (europeanFlags.length - 4)){
+        multipleSelection[i].textContent = europeanFlags[universalCount - i].country
+      }
+      else {
+        console.log(europeanFlags[i + universalCount].country)
+        multipleSelection[i].textContent = europeanFlags[universalCount + i].country
       }
       
     }
@@ -265,8 +497,49 @@ function loadMultipleSelections(){
 
 let isProcessing = false;
 
-[selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selection) => {
+// [selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selection) => {
 
+
+//   selection.addEventListener("click", () => {
+
+//     if (isProcessing) return;
+
+//     isProcessing = true;
+
+//     console.log(selection.innerHTML);
+//     console.log(count, 'count before increaseing count')
+
+//     if (selection.innerHTML === africanFlags[universalCount].country) {
+
+//       selection.style.color = "green";
+
+//       universalCount += 1;
+//       highscoreCounter += 1;
+
+//       increaseHighScoreCounted();
+
+//     } else {
+
+//       selection.style.color = "red";
+
+//       universalCount += 1;
+//     }
+
+//     setTimeout(() => {
+//       selection.style.color = "black";
+//     }, 1000);
+
+//     setTimeout(() => {
+//       loadAfricanFlags();
+//       isProcessing = false;
+//     }, 2000);
+
+//   });
+
+// });
+
+
+[selectionOne, selectionTwo, selectionThree, selectionFour].forEach((selection) => {
 
   selection.addEventListener("click", () => {
 
@@ -277,7 +550,7 @@ let isProcessing = false;
     console.log(selection.innerHTML);
     console.log(count, 'count before increaseing count')
 
-    if (selection.innerHTML === africanFlags[universalCount].country) {
+    if (selection.innerHTML === europeanFlags[universalCount].country) {
 
       selection.style.color = "green";
 
@@ -287,9 +560,7 @@ let isProcessing = false;
       increaseHighScoreCounted();
 
     } else {
-
       selection.style.color = "red";
-
       universalCount += 1;
     }
 
@@ -298,13 +569,14 @@ let isProcessing = false;
     }, 1000);
 
     setTimeout(() => {
-      loadAfricanFlags();
+      loadEuropeanFlags();
       isProcessing = false;
     }, 2000);
 
   });
 
 });
+
 
 
 restartQuizButton.addEventListener('click' , () => {
@@ -319,7 +591,9 @@ restartQuizButton.addEventListener('click' , () => {
   multipleNameContainer.style.display = 'block';
 
   // let isProcessing = true;
-  loadAfricanFlags()
+  loadFlags()
+  // loadAfricanFlags()
+  // loadEuropeanFlags()
 
 })
 
@@ -365,34 +639,5 @@ document.querySelectorAll(".under-construction").forEach(button => {
     });
 });
 
-//cookie-pop-up
-document.getElementById("cookie-pop-up").onload = function() {myFunction()};
 
-{/* <div id="app"> */}
-const app = document.getElementById("app");
-const cookiePopUpSection = document.getElementById("cookie-pop-up");
-const acceptAllCookies = document.getElementById("accept-all-cookie");
 
-function cookiePopUp() {
-  console.log('Hiding The Application While Cookies Are Being Selected')
-  app.style.display = 'none';
-}
-
-window.addEventListener('load', (event) => {
-  console.log('The page is fully loaded.');
-    console.log('Hiding The Application While Cookies Are Being Selected')
-    app.style.display = 'none';
-    app.style.background = 'blur';
-});
-
-acceptAllCookies.addEventListener('click', ()=>{
-    app.style.display = '';
-    cookiePopUpSection.style.display = 'none';
-})
-
-    //   <section id="cookie-pop-up">
-    //   <p id="cookie-policy-header">Cookie Policy</p>
-    //   <i id="cookie-information-icon" style="font-size:24px" class="fa">&#xf05a;</i>
-    //   <button id="accept-all-cookie">Accept All & Continue</button>
-    //   <button id="reject-cookie">Reject</button>
-    // </section>
